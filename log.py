@@ -1,11 +1,11 @@
-import os
+import os  
 import datetime 
-import pandas as p
+import pandas as pd
 import socket
 
 
-id = socket.gethostname()
-user=os.getlogin()
+id = socket.gethostname() #получаем имя компа
+user=os.getlogin()        #получаем имя пользователя
 
 
 def now_time():
@@ -14,35 +14,28 @@ def now_time():
 
 
 def sec():
-    now_datetime = str(datetime.datetime.now()).split() #время в данный момент времени
+    now_datetime = str(datetime.datetime.now()).split() #время в данный момент
     time = now_datetime[1]
     return time
 
 def log(func):
     def wrapper(*args, **kwargs):
-        if os.path.isfile('log.csv'):
-            file_df = p.read_csv('logs.csv')
-            data = {
-                'id' : [id],
-                'pc_username' : [user] ,
-                'function_name' : [func.__name__],
-                'date' : [now_time],
-                'time' : [sec]
-            }
-            df = p.DataFrame(data)
-            df.to_csv('log.csv', mode='a', index = False, header = False)
-
-        else: 
-            data = {
-                'id' : [id],
-                'pc_username' : [user] ,
-                'function_name' : [func.__name__],
-                'date' : [now_time],
-                'time' : [sec]
-            }
-            df.to_csv('logs.csv')
-            df = p.DataFrame(data)
             res = func(*args, **kwargs)
-            return res
-        return wrapper
+            data = {
+                'id' : [id],    # имя компа
+                'pc_username' : [user] ,    # имя пользователя
+                'function_name' : [func.__name__],    # имя вызванной функции
+                'date' : [now_time()],    # текущая дата
+                'time' : [sec()]     # текущая дата
+            }
+            df = pd.DataFrame(data)  # создаем датафрейм из словарика
+            
+            # сохраняем в цсвшчку
+            if os.path.isfile('log.csv'): # если файлик существует
+                df.to_csv('log.csv', mode = 'a', index = False, header = False)     #добавляем только строку
+            else: 
+                df.to_csv('log.csv', index = False) #создаем новый со всеми заголовками
 
+
+            return res
+    return wrapper
