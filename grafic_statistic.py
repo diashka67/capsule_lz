@@ -15,7 +15,7 @@ class AAPL:
     #https://www.tutorialspoint.com/article/how-to-create-a-candlestick-chart-in-matplotlib построение графика японских свечей
     @log
     def plot_stock_prices(self):
-        plt.figure(figsize=(10,5), dpi = 80,  facecolor="#2d3bd6")   #создаем график с синим фоном
+        plt.figure(figsize=(10,5), dpi = 80,  facecolor="#2d3bd6")   #создаем график с синим фоном, разные цвета для эстетики
         ax = plt.gca()
         ax.set_facecolor("#0b3675")
 
