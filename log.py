@@ -26,7 +26,7 @@ def log(func):
                 'pc_username' : [user] ,    # имя пользователя
                 'function_name' : [func.__name__],    # имя вызванной функции
                 'date' : [now_time()],    # текущая дата
-                'time' : [sec()]     # текущая дата
+                'time' : [sec()]     # текущее время
             }
             df = pd.DataFrame(data)  # создаем датафрейм из словарика
             
