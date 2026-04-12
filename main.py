@@ -1,7 +1,7 @@
 
 import log as log
-from graf_stat import plot_stock_prices
-from  graf_stat import AAPL
+from grafic_statistic import plot_stock_prices
+from  grafic_statistic import AAPL
 
 
 def main():
